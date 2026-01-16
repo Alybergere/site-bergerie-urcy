@@ -1,0 +1,62 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "config"
+    label: "Configuration du Site"
+    files:
+      - name: "ventes"
+        label: "Gestion des Ventes"
+        file: "content/ventes.json"
+        fields:
+          - label: "Statut des commandes"
+            name: "statut"
+            widget: "select"
+            options: ["Ouvertes", "Fermées"]
+            default: "Fermées"
+          
+          - label: "Message prochaine vente"
+            name: "prochaine_vente"
+            widget: "string"
+            hint: "Ex: Mars 2026 ou Samedi 15 mars 2026"
+          
+          - label: "Dates de retrait disponibles"
+            name: "dates_retrait"
+            widget: "list"
+            fields:
+              - label: "Date et heure"
+                name: "date"
+                widget: "string"
+                hint: "Ex: Samedi 15 mars 2026 - 9h-12h"
+      
+      - name: "produits"
+        label: "Produits et Prix"
+        file: "content/produits.json"
+        fields:
+          - label: "Colis"
+            name: "colis"
+            widget: "list"
+            fields:
+              - {label: "Nom", name: "nom", widget: "string"}
+              - {label: "Poids", name: "poids", widget: "string"}
+              - {label: "Prix (€)", name: "prix", widget: "number"}
+              - {label: "Icône emoji", name: "icon", widget: "string", default: "🥩"}
+              - label: "Détails"
+                name: "details"
+                widget: "list"
+                field: {label: "Ligne", name: "ligne", widget: "string"}
+      
+      - name: "contact"
+        label: "Informations de Contact"
+        file: "content/contact.json"
+        fields:
+          - {label: "Nom de la ferme", name: "nom_ferme", widget: "string"}
+          - {label: "Adresse", name: "adresse", widget: "text"}
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Téléphone", name: "telephone", widget: "string"}
+          - {label: "Description courte", name: "description", widget: "string"}
+          - {label: "Labels et certifications", name: "labels", widget: "text", hint: "Ex: Label Rouge, HVE, Bas Carbone"}
