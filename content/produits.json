@@ -1,0 +1,10 @@
+{
+  "colis": [
+    {
+      "icon": "🥩",
+      "nom": "caissette demi agneau",
+      "prix": 16,
+      "poids": "7-10"
+    }
+  ]
+}
