@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Bergerie d'Urcy - Vente Directe d'Agneaux</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <style>
+        :root {
+            --vert-principal: #2D5016;
+            --vert-clair: #5A7C56;
+            --creme: #F5F1E8;
+            --or: #D4AF37;
+            --accent: #C97A3D;
+            --text: #2C2416;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Lora', serif;
+            background: var(--creme);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 85vh;
+            background: linear-gradient(135deg, var(--vert-principal) 0%, var(--vert-clair) 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .logo {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 2rem;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: var(--creme);
+            margin-bottom: 1rem;
+            letter-spacing: 0.02em;
+        }
+        
+        .subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            color: rgba(245, 241, 232, 0.9);
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            animation: pulse 2s ease-in-out infinite;
+            box-shadow: 0 4px 20px rgba(201, 122, 61, 0.4);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .status-badge.closed {
+            background: #6B6B6B;
+            animation: none;
+        }
+        
+        /* Section commune */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--vert-principal);
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--or);
+            margin: 1rem auto 0;
+        }
+        
+        /* Nos Colis */
+        .produits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .produit {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+        
+        .produit:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+            border-color: var(--vert-clair);
+        }
+        
+        .produit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .produit h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--vert-principal);
+            margin-bottom: 0.5rem;
+        }
+        
+        .produit-poids {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .produit-prix {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--vert-principal);
+            margin: 1.5rem 0;
+        }
+        
+        .produit-details {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+        
+        .produit-details li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.95rem;
+            color: #666;
+        }
+        
+        .produit-details li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Formulaire de commande */
+        .formulaire-section {
+            background: linear-gradient(135deg, var(--vert-clair) 0%, var(--vert-principal) 100%);
+            padding: 5rem 2rem;
+            margin: 0;
+            max-width: 100%;
+        }
+        
+        .formulaire-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.15);
+        }
+        
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--vert-principal);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Lora', serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--vert-clair);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(90, 124, 86, 0.1);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .btn {
+            background: var(--accent);
+            color: white;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+            margin-top: 2rem;
+            font-family: 'Lora', serif;
+        }
+        
+        .btn:hover {
+            background: var(--vert-principal);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 122, 61, 0.3);
+        }
+        
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Info pratiques */
+        .info-pratiques {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--or);
+            margin-top: 3rem;
+        }
+        
+        .info-pratiques h3 {
+            color: var(--vert-principal);
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .info-pratiques p {
+            margin-bottom: 0.8rem;
+            line-height: 1.8;
+        }
+        
+        /* Labels Section */
+        .labels-section {
+            background: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .labels-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .labels-container h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--vert-principal);
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+        
+        .labels-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .label-badge {
+            background: linear-gradient(135deg, var(--vert-principal), var(--vert-clair));
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .label-badge::before {
+            content: '✓';
+            font-weight: bold;
+            color: var(--or);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--vert-principal);
+            color: var(--creme);
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+        
+        footer p {
+            margin: 0.5rem 0;
+        }
+        
+        footer a {
+            color: var(--creme);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        footer a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 70vh;
+            }
+            
+            .logo {
+                width: 140px;
+                height: 140px;
+            }
+            
+            section {
+                padding: 3rem 1.5rem;
+            }
+            
+            .formulaire-container {
+                padding: 2rem 1.5rem;
+            }
+            
+            .produits {
+                grid-template-columns: 1fr;
+            }
+            
+            .labels-list {
+                flex-direction: column;
+            }
+        }
+        
+        /* Message de confirmation */
+        .confirmation-message {
+            display: none;
+            background: var(--vert-clair);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .confirmation-message.show {
+            display: block;
+            animation: fadeInUp 0.6s ease;
+        }
+        
+        /* Loading state */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <div class="logo">
+                <img src="images/logo.png" alt="Logo La Bergerie d'Urcy">
+            </div>
+            <h1 id="nom-ferme">La Bergerie d'Urcy</h1>
+            <p class="subtitle" id="description">Agneaux élevés en plein air • Vente directe</p>
+            <div id="status-container">
+                <span class="status-badge closed">🔒 Chargement...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Nos Colis -->
+    <section id="produits">
+        <h2>Nos Colis d'Agneaux</h2>
+        <div class="produits" id="produits-container">
+            <div class="loading">Chargement des produits...</div>
+        </div>
+    </section>
+
+    <!-- Section Formulaire de Commande -->
+    <section class="formulaire-section" id="commande">
+        <div class="formulaire-container">
+            <h2 style="color: var(--vert-principal); margin-bottom: 2rem;">Passer Commande</h2>
+            
+            <form id="commandeForm" action="https://formspree.io/f/VOTRE_ID_FORMSPREE" method="POST">
+                <div class="form-group">
+                    <label for="nom">Nom et Prénom *</label>
+                    <input type="text" id="nom" name="nom" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="_replyto" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="telephone">Téléphone *</label>
+                    <input type="tel" id="telephone" name="telephone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="produit">Colis souhaité *</label>
+                    <select id="produit" name="produit" required>
+                        <option value="">-- Choisir un colis --</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="quantite">Quantité</label>
+                    <input type="number" id="quantite" name="quantite" value="1" min="1" max="10">
+                </div>
+                
+                <div class="form-group">
+                    <label for="date-retrait">Date de retrait souhaitée *</label>
+                    <select id="date-retrait" name="date-retrait" required>
+                        <option value="">-- Choisir une date --</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="commentaire">Commentaire ou demande particulière</label>
+                    <textarea id="commentaire" name="commentaire" placeholder="Découpe spécifique, allergies, questions..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn">Envoyer ma commande</button>
+                
+                <div class="confirmation-message" id="confirmationMessage">
+                    <h3 style="margin-bottom: 1rem;">✅ Commande envoyée !</h3>
+                    <p>Merci pour votre commande. Vous allez recevoir un email de confirmation sous peu.</p>
+                </div>
+            </form>
+        </div>
+        
+        <div class="info-pratiques" style="max-width: 700px; margin: 3rem auto 0;">
+            <h3>📍 Informations pratiques</h3>
+            <p><strong>Lieu de retrait :</strong> <span id="adresse-ferme">Chargement...</span></p>
+            <p><strong>Paiement :</strong> Espèces ou chèque sur place</p>
+            <p><strong>Annulation :</strong> Possible jusqu'à 48h avant le retrait</p>
+            <p><strong>Conservation :</strong> Nos colis sont conditionnés sous-vide et peuvent être congelés immédiatement</p>
+        </div>
+    </section>
+
+    <!-- Section Labels et Certifications -->
+    <section class="labels-section">
+        <div class="labels-container">
+            <h3>Nos Engagements Qualité</h3>
+            <div class="labels-list" id="labels-container">
+                <div class="loading">Chargement...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong id="footer-nom">La Bergerie d'Urcy</strong></p>
+        <p>📧 <span id="footer-email">earlbossong@gmail.com</span> | 📱 <span id="footer-tel">06 14 55 97 93</span></p>
+        <p style="margin-top: 1.5rem; opacity: 0.8;">
+            <a href="/admin" target="_blank">Accès Admin</a>
+        </p>
+    </footer>
+
+    <script>
+        // Charger les données depuis les fichiers JSON
+        let ventesData, produitsData, contactData;
+
+        async function loadData() {
+            try {
+                // Charger tous les fichiers JSON
+                const [ventes, produits, contact] = await Promise.all([
+                    fetch('content/ventes.json').then(r => r.json()),
+                    fetch('content/produits.json').then(r => r.json()),
+                    fetch('content/contact.json').then(r => r.json())
+                ]);
+
+                ventesData = ventes;
+                produitsData = produits;
+                contactData = contact;
+
+                // Mettre à jour l'interface
+                updateUI();
+            } catch (error) {
+                console.error('Erreur lors du chargement des données:', error);
+                // Fallback sur des valeurs par défaut
+                useFallbackData();
+            }
+        }
+
+        function updateUI() {
+            // Mettre à jour les informations de contact
+            document.getElementById('nom-ferme').textContent = contactData.nom_ferme;
+            document.getElementById('description').textContent = contactData.description;
+            document.getElementById('footer-nom').textContent = contactData.nom_ferme;
+            document.getElementById('footer-email').textContent = contactData.email;
+            document.getElementById('footer-tel').textContent = contactData.telephone;
+            document.getElementById('adresse-ferme').textContent = contactData.adresse.replace('\n', ', ');
+
+            // Mettre à jour le statut des ventes
+            updateStatus();
+
+            // Afficher les produits
+            displayProduits();
+
+            // Afficher les labels
+            displayLabels();
+
+            // Remplir les dates de retrait
+            fillDatesRetrait();
+        }
+
+        function updateStatus() {
+            const container = document.getElementById('status-container');
+            const isOpen = ventesData.statut === 'Ouvertes';
+
+            if (isOpen) {
+                container.innerHTML = `
+                    <span class="status-badge">✅ Commandes ouvertes</span>
+                    <p style="color: var(--creme); margin-top: 1rem; font-size: 1.1rem;">
+                        <a href="#commande" style="color: var(--creme); text-decoration: underline;">Commander maintenant →</a>
+                    </p>
+                `;
+            } else {
+                container.innerHTML = `
+                    <span class="status-badge closed">🔒 Commandes fermées</span>
+                    <p style="color: var(--creme); margin-top: 1rem; font-size: 1.1rem;">
+                        Prochaine vente : <strong>${ventesData.prochaine_vente}</strong>
+                    </p>
+                `;
+            }
+        }
+
+        function displayProduits() {
+            const container = document.getElementById('produits-container');
+            const selectProduit = document.getElementById('produit');
+            
+            // Vider les conteneurs
+            container.innerHTML = '';
+            selectProduit.innerHTML = '<option value="">-- Choisir un colis --</option>';
+
+            // Afficher chaque produit
+            produitsData.colis.forEach(colis => {
+                // Créer la carte produit
+                const produitDiv = document.createElement('div');
+                produitDiv.className = 'produit';
+                produitDiv.innerHTML = `
+                    <span class="produit-icon">${colis.icon}</span>
+                    <h3>${colis.nom}</h3>
+                    <div class="produit-poids">${colis.poids}</div>
+                    <div class="produit-prix">${colis.prix} €</div>
+                    <ul class="produit-details">
+                        ${colis.details.map(d => `<li>${d.ligne}</li>`).join('')}
+                    </ul>
+                `;
+                container.appendChild(produitDiv);
+
+                // Ajouter au select du formulaire
+                const option = document.createElement('option');
+                option.value = `${colis.nom} ${colis.poids} - ${colis.prix}€`;
+                option.textContent = `${colis.nom} ${colis.poids} - ${colis.prix}€`;
+                selectProduit.appendChild(option);
+            });
+        }
+
+        function fillDatesRetrait() {
+            const select = document.getElementById('date-retrait');
+            select.innerHTML = '<option value="">-- Choisir une date --</option>';
+
+            ventesData.dates_retrait.forEach(dateObj => {
+                const option = document.createElement('option');
+                option.value = dateObj.date;
+                option.textContent = dateObj.date;
+                select.appendChild(option);
+            });
+        }
+
+        function displayLabels() {
+            const container = document.getElementById('labels-container');
+            const labelsArray = contactData.labels.split('•').map(l => l.trim()).filter(l => l);
+            
+            container.innerHTML = '';
+            labelsArray.forEach(label => {
+                const badge = document.createElement('div');
+                badge.className = 'label-badge';
+                badge.textContent = label;
+                container.appendChild(badge);
+            });
+        }
+
+        function useFallbackData() {
+            // Données par défaut en cas d'erreur
+            document.getElementById('nom-ferme').textContent = 'La Bergerie d\'Urcy';
+            document.getElementById('description').textContent = 'Agneaux élevés en plein air • Vente directe';
+            document.getElementById('status-container').innerHTML = `
+                <span class="status-badge closed">🔒 Commandes fermées</span>
+                <p style="color: var(--creme); margin-top: 1rem; font-size: 1.1rem;">
+                    Prochaine vente : <strong>Mars 2026</strong>
+                </p>
+            `;
+        }
+
+        // Gestion du formulaire
+        document.getElementById('commandeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const formData = new FormData(form);
+            
+            // Envoi à Formspree
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('confirmationMessage').classList.add('show');
+                    setTimeout(() => {
+                        form.reset();
+                        setTimeout(() => {
+                            document.getElementById('confirmationMessage').classList.remove('show');
+                        }, 3000);
+                    }, 2000);
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            alert('Erreur lors de l\'envoi: ' + data.errors.map(error => error.message).join(', '));
+                        } else {
+                            alert('Une erreur est survenue. Veuillez réessayer ou nous contacter par téléphone.');
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                alert('Une erreur est survenue. Veuillez vérifier votre connexion et réessayer.');
+            });
+        });
+
+        // Charger les données au chargement de la page
+        loadData();
+
+        // Netlify Identity Widget
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+                if (!user) {
+                    window.netlifyIdentity.on("login", () => {
+                        document.location.href = "/admin/";
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html>
